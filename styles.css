@@ -1,7 +1,182 @@
-* {
+/* ==========================================================================
+   My styles page was generated using anitgravity AI
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap');
+
+:root {
+    /* Color Palette */
+    --bg-base: #070a13;
+    --bg-card: rgba(15, 23, 42, 0.72);
+    --bg-card-hover: rgba(26, 36, 61, 0.8);
+    --bg-btn: rgba(255, 255, 255, 0.04);
+    --bg-btn-hover: rgba(99, 102, 241, 0.12);
+
+    /* Borders & Outlines */
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-highlight: rgba(255, 255, 255, 0.18);
+    --border-accent: rgba(99, 102, 241, 0.5);
+
+    /* Accents & Gradients */
+    --accent-indigo: #6366f1;
+    --accent-violet: #8b5cf6;
+    --accent-fuchsia: #d946ef;
+    --accent-cyan: #06b6d4;
+    --accent-emerald: #10b981;
+    --accent-rose: #f43f5e;
+    --accent-amber: #f59e0b;
+
+    --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
+    --gradient-cyan: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+    --gradient-emerald: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    --gradient-rose: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+
+    /* Typography */
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-heading: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    /* Text Colors */
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+
+    /* Shadows & Glows */
+    --shadow-card: 0 24px 60px -12px rgba(0, 0, 0, 0.7),
+                   0 0 0 1px rgba(255, 255, 255, 0.06),
+                   0 0 40px -10px rgba(99, 102, 241, 0.15);
+    --shadow-btn-glow: 0 10px 25px -4px rgba(99, 102, 241, 0.45);
+    --shadow-emerald-glow: 0 0 25px rgba(16, 185, 129, 0.25);
+    --shadow-rose-glow: 0 0 25px rgba(244, 63, 94, 0.25);
+
+    /* Radii */
+    --radius-sm: 10px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+    --radius-pill: 9999px;
+}
+
+/* ==========================================================================
+   Global Reset & Base Setup
+   ========================================================================== */
+
+*, *::before, *::after {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    /* is a visual polish to make text look smoother */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    min-height: 100vh;
+    font-family: var(--font-sans);
+    color: var(--text-primary);
+    background-color: var(--bg-base);
+    /* Four gradients coem together to give the page the deep blue feel  */
+    background-image:
+        radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.18) 0%, transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(217, 70, 239, 0.14) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.07) 0%, transparent 60%),
+        radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.12) 0%, transparent 40%);
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px 16px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Subtle Animated Ambient Glow in Background */
+body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 30%, rgba(99, 102, 241, 0.1), transparent 35%),
+                radial-gradient(circle at 70% 70%, rgba(6, 182, 212, 0.08), transparent 40%);
+    pointer-events: none;
+    z-index: -1;
+    animation: ambientShift 20s ease-in-out infinite alternate;
+}
+
+@keyframes ambientShift {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(2%, 1.5%) scale(1.04); }
+    100% { transform: translate(-2%, -1.5%) scale(1); }
+}
+
+/* ==========================================================================
+   Screen Containers & Glassmorphism Card
+   ========================================================================== */
+
+.start-screen,
+.quiz-screen,
+.results-screen,
+.review-screen {
+    width: 100%;
+    max-width: 600px;
+    background: var(--bg-card);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    padding: 44px 36px;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    overflow: hidden;
+    animation: cardEntrance 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Glowing Top Accent Line on Cards */
+.start-screen::before,
+.quiz-screen::before,
+.results-screen::before,
+.review-screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.2) 20%, 
+        var(--accent-indigo) 50%, 
+        var(--accent-fuchsia) 80%, 
+        transparent
+    );
+    pointer-events: none;
+}
+
+/* Specular Inner Glare */
+.start-screen::after,
+.quiz-screen::after,
+.results-screen::after,
+.review-screen::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    pointer-events: none;
+}
+
+/* Screen Visibility Logic */
+.start-screen {
+    display: flex;
 }
 
 .quiz-screen {
@@ -14,4 +189,633 @@
 
 .review-screen {
     display: none;
+}
+
+/* Support active/show classes if toggled via JS classList */
+.start-screen.active,
+.quiz-screen.active,
+.results-screen.active,
+.review-screen.active,
+.start-screen.show,
+.quiz-screen.show,
+.results-screen.show,
+.review-screen.show {
+    display: flex !important;
+}
+
+/* ==========================================================================
+   Start Screen
+   ========================================================================== */
+
+.start-screen {
+    padding: 52px 40px;
+}
+
+/* Pre-heading Pill Badge */
+.start-screen h1::before {
+    content: '✦ INTERACTIVE QUIZ';
+    display: block;
+    width: fit-content;
+    margin: 0 auto 20px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--accent-cyan);
+    background: rgba(6, 182, 212, 0.1);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    padding: 6px 16px;
+    border-radius: var(--radius-pill);
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+}
+
+.start-screen h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2.2rem, 5.5vw, 3rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    margin-bottom: 18px;
+    background: linear-gradient(135deg, #ffffff 20%, #cbd5e1 50%, #a5b4fc 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.start-screen p {
+    font-size: 1.06rem;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    max-width: 440px;
+    margin-bottom: 38px;
+    font-weight: 400;
+}
+
+.start-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--gradient-primary);
+    background-size: 200% 200%;
+    color: #ffffff;
+    font-family: var(--font-sans);
+    font-size: 1.08rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    padding: 16px 42px;
+    border: none;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    box-shadow: var(--shadow-btn-glow), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    outline: none;
+}
+
+.start-btn::after {
+    content: '→';
+    font-size: 1.2rem;
+    transition: transform 0.25s ease;
+}
+
+.start-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 16px 32px -4px rgba(139, 92, 246, 0.6),
+                0 0 25px rgba(217, 70, 239, 0.35);
+    background-position: right center;
+}
+
+.start-btn:hover::after {
+    transform: translateX(4px);
+}
+
+.start-btn:active {
+    transform: translateY(1px) scale(0.99);
+}
+
+.start-btn:focus-visible {
+    outline: 3px solid rgba(139, 92, 246, 0.6);
+    outline-offset: 4px;
+}
+
+/* ==========================================================================
+   Quiz Screen
+   ========================================================================== */
+
+.quiz-screen {
+    align-items: stretch;
+    text-align: left;
+}
+
+/* Progress Bar Track & Fill */
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-pill);
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Dual support: If script sets width directly on .progress-bar OR uses child div */
+.progress-bar:not(:has(> *)) {
+    background: linear-gradient(90deg, var(--accent-indigo), var(--accent-cyan));
+    box-shadow: 0 0 14px rgba(6, 182, 212, 0.4);
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.progress-bar:has(> *) {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.progress-bar > div,
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-indigo), var(--accent-cyan));
+    border-radius: var(--radius-pill);
+    box-shadow: 0 0 14px rgba(6, 182, 212, 0.45);
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Question Text */
+.question-text {
+    font-family: var(--font-heading);
+    font-size: clamp(1.3rem, 3.5vw, 1.6rem);
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.45;
+    letter-spacing: -0.015em;
+    margin-bottom: 28px;
+    min-height: 48px;
+}
+
+/* Answer Buttons Container */
+.answer-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 28px;
+}
+
+/* Answer Buttons & Option Buttons */
+.answer-buttons button,
+.answer-btn {
+    position: relative;
+    width: 100%;
+    padding: 16px 20px;
+    background: var(--bg-btn);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    color: #e2e8f0;
+    font-family: var(--font-sans);
+    font-size: 1.02rem;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    backdrop-filter: blur(12px);
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    outline: none;
+    user-select: none;
+}
+
+.answer-buttons button::before,
+.answer-btn::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+}
+
+/* Answer Button Hover */
+.answer-buttons button:hover:not(:disabled),
+.answer-btn:hover:not(:disabled) {
+    background: var(--bg-btn-hover);
+    border-color: var(--border-accent);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px -4px rgba(99, 102, 241, 0.25),
+                inset 0 0 16px rgba(99, 102, 241, 0.08);
+}
+
+.answer-buttons button:hover:not(:disabled)::before,
+.answer-btn:hover:not(:disabled)::before {
+    background: var(--accent-indigo);
+    box-shadow: 0 0 10px var(--accent-indigo);
+    transform: scale(1.25);
+}
+
+/* Active / Pressed */
+.answer-buttons button:active:not(:disabled),
+.answer-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+/* Focus Visible */
+.answer-buttons button:focus-visible,
+.answer-btn:focus-visible {
+    outline: 2px solid var(--accent-violet);
+    outline-offset: 2px;
+}
+
+/* Answer Feedback State: Correct */
+.answer-buttons button.correct,
+.answer-btn.correct {
+    background: rgba(16, 185, 129, 0.16) !important;
+    border-color: rgba(16, 185, 129, 0.75) !important;
+    color: #34d399 !important;
+    box-shadow: var(--shadow-emerald-glow), inset 0 0 20px rgba(16, 185, 129, 0.12) !important;
+    font-weight: 600;
+}
+
+.answer-buttons button.correct::before,
+.answer-btn.correct::before {
+    background: var(--accent-emerald) !important;
+    box-shadow: 0 0 12px var(--accent-emerald) !important;
+}
+
+/* Answer Feedback State: Wrong */
+.answer-buttons button.wrong,
+.answer-btn.wrong,
+.answer-buttons button.incorrect,
+.answer-btn.incorrect {
+    background: rgba(244, 63, 94, 0.16) !important;
+    border-color: rgba(244, 63, 94, 0.75) !important;
+    color: #fb7185 !important;
+    box-shadow: var(--shadow-rose-glow), inset 0 0 20px rgba(244, 63, 94, 0.12) !important;
+    font-weight: 600;
+    animation: shake 0.4s ease;
+}
+
+.answer-buttons button.wrong::before,
+.answer-btn.wrong::before,
+.answer-buttons button.incorrect::before,
+.answer-btn.incorrect::before {
+    background: var(--accent-rose) !important;
+    box-shadow: 0 0 12px var(--accent-rose) !important;
+}
+
+/* Disabled Option Buttons */
+.answer-buttons button:disabled,
+.answer-btn:disabled,
+.answer-buttons button.disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+/* Live Current Score Badge */
+.current-score-disp {
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-subtle);
+    padding: 8px 20px;
+    border-radius: var(--radius-pill);
+    letter-spacing: 0.04em;
+    backdrop-filter: blur(10px);
+}
+
+.current-score-disp::before {
+    content: '🏆';
+    font-size: 0.95rem;
+}
+
+/* Hide empty score badge until populated */
+.current-score-disp:empty {
+    display: none;
+}
+
+/* ==========================================================================
+   Results Screen
+   ========================================================================== */
+
+.results-screen {
+    padding: 48px 36px;
+    text-align: center;
+}
+
+/* Letter Grade Glowing Holographic Badge */
+.letter-grade {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    margin: 4px auto 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-size: 3.4rem;
+    font-weight: 800;
+    background: radial-gradient(circle at 35% 30%, rgba(139, 92, 246, 0.28), rgba(15, 23, 42, 0.85));
+    border: 2px solid rgba(139, 92, 246, 0.65);
+    box-shadow: 0 0 35px rgba(139, 92, 246, 0.4),
+                inset 0 0 25px rgba(139, 92, 246, 0.25);
+    color: #ffffff;
+    text-shadow: 0 0 18px rgba(255, 255, 255, 0.7);
+    animation: gradeAura 3s ease-in-out infinite alternate;
+}
+
+@keyframes gradeAura {
+    0% {
+        box-shadow: 0 0 30px rgba(139, 92, 246, 0.35), inset 0 0 20px rgba(139, 92, 246, 0.2);
+        border-color: rgba(139, 92, 246, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 45px rgba(217, 70, 239, 0.55), inset 0 0 30px rgba(99, 102, 241, 0.3);
+        border-color: rgba(217, 70, 239, 0.75);
+    }
+}
+
+/* Final Score */
+.final-score {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: #ffffff;
+    margin-bottom: 12px;
+}
+
+/* Congratulatory / Feedback Message */
+.message {
+    font-size: 1.08rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    max-width: 440px;
+    margin-bottom: 36px;
+}
+
+/* Results Action Buttons Group */
+.review-buttons {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Review Answers Button (Secondary Sleek Ghost) */
+#review-btn {
+    flex: 1;
+    min-width: 170px;
+    padding: 15px 26px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-highlight);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: 1.02rem;
+    font-weight: 600;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    outline: none;
+}
+
+#review-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.35);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px -4px rgba(0, 0, 0, 0.4);
+}
+
+#review-btn:active {
+    transform: translateY(0);
+}
+
+/* Restart Quiz Button (Primary Glowing Gradient) */
+#restart-btn {
+    flex: 1;
+    min-width: 170px;
+    padding: 15px 28px;
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: var(--radius-md);
+    color: #ffffff;
+    font-family: var(--font-sans);
+    font-size: 1.02rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: var(--shadow-btn-glow), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    outline: none;
+}
+
+#restart-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px -4px rgba(139, 92, 246, 0.65),
+                0 0 25px rgba(217, 70, 239, 0.4);
+}
+
+#restart-btn:active {
+    transform: translateY(0);
+}
+
+#review-btn:focus-visible,
+#restart-btn:focus-visible {
+    outline: 2px solid var(--accent-violet);
+    outline-offset: 3px;
+}
+
+/* ==========================================================================
+   Review Screen
+   ========================================================================== */
+
+.review-screen {
+    max-width: 680px;
+    text-align: left;
+    align-items: stretch;
+    padding: 40px 32px;
+}
+
+/* Card Container Scroll List */
+.card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-height: 480px;
+    overflow-y: auto;
+    padding-right: 8px;
+    margin-bottom: 28px;
+}
+
+/* Review Cards Injected dynamically */
+.card-container > div,
+.review-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    transition: all 0.2s ease;
+}
+
+.card-container > div:hover,
+.review-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--border-highlight);
+    transform: translateY(-1px);
+}
+
+.card-container h3,
+.review-card h3,
+.review-question-title {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #f8fafc;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.card-container p,
+.review-card p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 6px;
+    color: var(--text-secondary);
+}
+
+/* Results Back Button */
+#results-btn {
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 200px;
+    padding: 15px 32px;
+    background: var(--gradient-cyan);
+    border: none;
+    border-radius: var(--radius-pill);
+    color: #ffffff;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 10px 24px -4px rgba(6, 182, 212, 0.4);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    outline: none;
+}
+
+/* Graceful text fallback if empty in HTML */
+#results-btn:empty::before {
+    content: 'Back to Results';
+}
+
+#results-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px -4px rgba(6, 182, 212, 0.55),
+                0 0 20px rgba(59, 130, 246, 0.35);
+}
+
+#results-btn:active {
+    transform: translateY(0);
+}
+
+#results-btn:focus-visible {
+    outline: 2px solid var(--accent-cyan);
+    outline-offset: 3px;
+}
+
+/* ==========================================================================
+   Micro-Animations & Keyframes
+   ========================================================================== */
+
+@keyframes cardEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-6px); }
+    40% { transform: translateX(6px); }
+    60% { transform: translateX(-4px); }
+    80% { transform: translateX(4px); }
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+
+@media (max-width: 640px) {
+    body {
+        padding: 16px 12px;
+    }
+
+    .start-screen,
+    .quiz-screen,
+    .results-screen,
+    .review-screen {
+        padding: 32px 20px;
+        border-radius: var(--radius-lg);
+    }
+
+    .start-screen {
+        padding: 38px 20px;
+    }
+
+    .start-screen h1 {
+        font-size: 2.2rem;
+    }
+
+    .start-btn {
+        width: 100%;
+        padding: 15px 24px;
+    }
+
+    .question-text {
+        font-size: 1.25rem;
+    }
+
+    .answer-buttons button,
+    .answer-btn {
+        padding: 14px 16px;
+        font-size: 0.96rem;
+    }
+
+    .letter-grade {
+        width: 90px;
+        height: 90px;
+        font-size: 2.8rem;
+    }
+
+    .final-score {
+        font-size: 1.9rem;
+    }
+
+    .review-buttons {
+        flex-direction: column;
+    }
+
+    #review-btn,
+    #restart-btn,
+    #results-btn {
+        width: 100%;
+    }
 }

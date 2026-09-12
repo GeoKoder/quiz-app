@@ -1,0 +1,17 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.quiz-screen {
+    display: none;
+}
+
+.results-screen {
+    display: none;
+}
+
+.review-screen {
+    display: none;
+}

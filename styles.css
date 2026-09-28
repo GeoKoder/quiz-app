@@ -512,6 +512,7 @@ body::before {
     color: #34d399 !important;
     box-shadow: var(--shadow-emerald-glow), inset 0 0 20px rgba(16, 185, 129, 0.12) !important;
     font-weight: 600;
+    animation: popSuccess 0.35s ease;
 }
 
 .answer-buttons button.correct::before,
@@ -935,6 +936,18 @@ body::before {
 
     80% {
         transform: translateX(4px);
+    }
+}
+
+@keyframes popSuccess {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.025);
+    }
+    100% {
+        transform: scale(1);
     }
 }
 

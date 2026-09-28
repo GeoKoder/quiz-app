@@ -141,8 +141,7 @@ function handleAnswerSelection(selectedIndex) {
         const btnIndex = parseInt(btn.getAttribute('data-index'), 10);
         if (btnIndex === currentQ.correct) {
             btn.classList.add('correct');
-        }
-        if (btnIndex === selectedIndex) {
+        } else if (btnIndex === selectedIndex) {
             btn.classList.add('wrong');
         }
     });

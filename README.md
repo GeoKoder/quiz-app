@@ -50,51 +50,6 @@ quiz-app/
 
 ---
 
-## 🐛 Bug Fix: Correct Answer Blinking Red
-
-### What Went Wrong?
-When selecting the correct answer, the button would flash green for a fraction of a millisecond and immediately shake violently in red as if wrong.
-
-**Root Cause:**
-In `script.js`, inside `handleAnswerSelection(selectedIndex)`, two independent `if` statements were executed sequentially on every button:
-
-```javascript
-// ❌ BEFORE (Buggy Implementation)
-buttons.forEach(btn => {
-    const btnIndex = parseInt(btn.getAttribute('data-index'), 10);
-    if (btnIndex === currentQ.correct) {
-        btn.classList.add('correct');
-    }
-    if (btnIndex === selectedIndex) {
-        btn.classList.add('wrong'); // Ran unconditionally for the selected button!
-    }
-});
-```
-
-When a user picked the **correct answer**, `selectedIndex === currentQ.correct`:
-1. The first `if` evaluated to `true`, adding `.correct`.
-2. The second `if` **also** evaluated to `true`, adding `.wrong` to the exact same button (`class="answer-btn correct wrong"`).
-3. In `styles.css`, `.wrong` had `!important` declarations, red colors, and `animation: shake 0.4s ease;` defined **after** `.correct`, overriding the green styling and triggering the red shaking blink effect.
-
-### How It Was Fixed:
-The second check was changed to an `else if`:
-
-```javascript
-// ✅ AFTER (Fixed Implementation)
-buttons.forEach(btn => {
-    const btnIndex = parseInt(btn.getAttribute('data-index'), 10);
-    if (btnIndex === currentQ.correct) {
-        btn.classList.add('correct');
-    } else if (btnIndex === selectedIndex) {
-        btn.classList.add('wrong'); // Only applied if the selected button is NOT the correct one
-    }
-});
-```
-
-Additionally, `@keyframes popSuccess` was introduced in `styles.css` to give correct selections a smooth, satisfying scale pulse and glowing emerald feedback.
-
----
-
 ## 🚀 Getting Started Locally
 
 ### Prerequisites

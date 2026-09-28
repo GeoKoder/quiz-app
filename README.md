@@ -10,7 +10,6 @@ Experience the live application here:
 
 👉 **[Launch Live Demo](https://geokoder.github.io/quiz-app/)** 👈
 
-> **Note:** If you are hosting on GitHub Pages, Netlify, or Vercel, replace the URL above with your custom deployment URL.
 
 ---
 
